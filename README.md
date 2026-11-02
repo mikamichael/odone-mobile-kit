@@ -1,5 +1,9 @@
 # odone-mobile-kit
 
+[![CI](https://github.com/mikamichael/odone-mobile-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/mikamichael/odone-mobile-kit/actions/workflows/ci.yml)
+
+**在线演示**：https://mikamichael.github.io/odone-mobile-kit/ （手机宽度下看列表会变成卡片）
+
 面向车间、仓储、外勤这类「手机上一只手操作」场景的前端内核：**页面外壳 + 声明式列表 + 声明式表单 + 请求层与错误映射机制 + 适配器接口**。
 
 它只提供形状，不提供业务。任何行业字段（单据号叫什么、工序有哪些、错误码含义）都由使用方注入。

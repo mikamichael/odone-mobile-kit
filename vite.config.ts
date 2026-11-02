@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react';
 const resolvePath = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 
 export default defineConfig({
+  // GitHub Pages 部署在 /<repo>/ 下，构建时用 PAGES_BASE 传进来；本地与自托管保持根路径。
+  base: process.env.PAGES_BASE ?? '/',
   root: resolvePath('./apps/demo'),
   plugins: [react()],
   resolve: {
