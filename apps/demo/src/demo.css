@@ -1,0 +1,12 @@
+.demo-block { margin-bottom: 14px; }
+.demo-heading { margin: 0 0 8px; font-size: 14px; color: var(--kit-color-text-muted); font-weight: 600; }
+.demo-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.demo-actions .kit-button { flex: 1 1 140px; }
+.demo-toast {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--kit-color-warning-bg);
+  font-size: 13px;
+}
+.demo-who { font-size: 12px; color: var(--kit-color-text-muted); }

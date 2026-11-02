@@ -1,0 +1,12 @@
+{
+  "name": "@odone-mobile-kit/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "通用的移动端页面外壳、声明式列表与表单、请求层与错误映射机制。不含任何业务字段。",
+  "license": "Apache-2.0",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/theme/tokens.css"
+  }
+}

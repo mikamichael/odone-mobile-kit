@@ -1,0 +1,11 @@
+{
+  "name": "@odone-mobile-kit/adapters",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "与具体平台对接的适配层：身份与扫码、打印通道。只提供接口与本机演示实现，真实实现由使用方注入。",
+  "license": "Apache-2.0",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

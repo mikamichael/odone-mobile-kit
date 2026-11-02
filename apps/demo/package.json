@@ -1,0 +1,8 @@
+{
+  "name": "@odone-mobile-kit/demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "演示站：用假数据展示内核的列表 / 表单 / 状态 / 适配器用法。",
+  "license": "Apache-2.0"
+}
