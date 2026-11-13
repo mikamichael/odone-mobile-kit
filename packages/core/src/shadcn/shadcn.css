@@ -1,0 +1,69 @@
+/**
+ * @kit/core/shadcn.css —— 想用 shadcn 子入口的消费方只需要引这一行
+ *
+ * 里面做三件事（少一件就会「样式在但不生效」）：
+ *   1. 引主题变量（tokens.css）：--kit-color-* 必须有值
+ *   2. 把 shadcn 的语义变量映射到 kit 的 token 上：一套色，不出两套主题
+ *   3. @source 指向本目录：让 Tailwind 扫到包内组件的 class
+ *
+ * 用法：
+ *   @import "tailwindcss";
+ *   @import "@odone-mobile-kit/core/shadcn.css";
+ * 注意 @import "tailwindcss" 要在前面（preflight 先跑，kit 样式后跑优先级更高）。
+ */
+@import "../theme/tokens.css";
+
+/* 组件源码就在本文件所在目录，显式声明扫描范围，别依赖消费方的 root */
+@source ".";
+
+:root {
+  --background: var(--kit-color-bg);
+  --foreground: var(--kit-color-text);
+  --card: var(--kit-color-surface);
+  --card-foreground: var(--kit-color-text);
+  --popover: var(--kit-color-surface);
+  --popover-foreground: var(--kit-color-text);
+  --primary: var(--kit-color-primary);
+  --primary-foreground: var(--kit-color-primary-text);
+  --secondary: var(--kit-color-bg);
+  --secondary-foreground: var(--kit-color-text);
+  --muted: var(--kit-color-bg);
+  --muted-foreground: var(--kit-color-text-muted);
+  --accent: var(--kit-color-primary-soft);
+  --accent-foreground: var(--kit-color-text);
+  --destructive: var(--kit-color-danger);
+  --destructive-foreground: var(--kit-color-primary-text);
+  --border: var(--kit-color-border);
+  --input: var(--kit-color-border);
+  --ring: var(--kit-color-ring);
+  --radius: var(--kit-radius);
+}
+
+/* 深色无需重写：kit 的 tokens 已在 prefers-color-scheme 里换过语义层 */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: var(--kit-radius-sm);
+  --radius-md: var(--kit-radius);
+  --radius-lg: var(--kit-radius);
+  --radius-xl: var(--kit-radius);
+}

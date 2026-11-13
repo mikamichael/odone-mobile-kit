@@ -1,66 +1,12 @@
-/* 试点用：Tailwind v4 + shadcn 变量层
+/* 试点/示范站的 Tailwind 入口
  *
- * 关键决定：shadcn 的语义变量不是新的一套色，而是**映射到 kit 的 tokens**。
- * 这样换品牌色只改 tokens.css 一层，shadcn 组件跟着变，不会出现「两套主题」。
+ * 变量映射（shadcn 语义 → kit token）与扫描范围都在包里那份 shadcn.css 里，
+ * 这里只负责「先 base、后包」的顺序：Tailwind 的 preflight 先跑，
+ * kit 的主题与组件样式后跑、优先级更高，避免 preflight 把 body/间距重置掉。
  *
- * 引入顺序（main.tsx）：shadcn.css → @kit/core-theme → demo.css
- *   Tailwind 的 preflight 先跑，kit 的全局样式与组件样式后跑、优先级更高，
- *   避免 preflight 把 body/间距重置掉。
+ * 消费方（别的仓/别的页面）也可以只写这两行，把路径换成包路径：
+ *   @import "tailwindcss";
+ *   @import "@odone-mobile-kit/core/shadcn.css";
  */
 @import "tailwindcss";
-
-/* 组件原语在 packages/core/src/shadcn 下，不在 vite root（apps/demo）里，
- * 不显式 @source 的话 Tailwind 扫不到它们的 class，样式会静默丢一半。 */
-@source "../../../packages/core/src/shadcn";
-
-:root {
-  --background: var(--kit-color-bg);
-  --foreground: var(--kit-color-text);
-  --card: var(--kit-color-surface);
-  --card-foreground: var(--kit-color-text);
-  --popover: var(--kit-color-surface);
-  --popover-foreground: var(--kit-color-text);
-  --primary: var(--kit-color-primary);
-  --primary-foreground: var(--kit-color-primary-text);
-  --secondary: var(--kit-color-bg);
-  --secondary-foreground: var(--kit-color-text);
-  --muted: var(--kit-color-bg);
-  --muted-foreground: var(--kit-color-text-muted);
-  --accent: var(--kit-color-primary-soft);
-  --accent-foreground: var(--kit-color-text);
-  --destructive: var(--kit-color-danger);
-  --destructive-foreground: var(--kit-color-primary-text);
-  --border: var(--kit-color-border);
-  --input: var(--kit-color-border);
-  --ring: var(--kit-color-ring);
-  --radius: var(--kit-radius);
-}
-
-/* 深色无需重写：kit 的 tokens 已经在 prefers-color-scheme 里换过语义层 */
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --radius-sm: var(--kit-radius-sm);
-  --radius-md: var(--kit-radius);
-  --radius-lg: var(--kit-radius);
-  --radius-xl: var(--kit-radius);
-}
+@import "../../../packages/core/src/shadcn/shadcn.css";
