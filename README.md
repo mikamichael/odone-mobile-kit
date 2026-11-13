@@ -26,11 +26,14 @@
 ```
 packages/
   core/        页面外壳、列表、表单、请求层、错误映射、格式化、主题变量
+    shadcn/    ★ 可选子入口（@kit/core/shadcn）：shadcn 原语 + Kit 封装，需 Tailwind v4
   adapters/    适配器接口 + 演示实现（身份与扫码、打印通道）
 apps/
-  demo/        演示站：假数据、能点的报工页
+  demo/        演示站：假数据、能点的报工页；`?pilot=1` 是 shadcn 试点样板页
 test/          vitest 引导
 ```
+
+主入口 `@kit/core` 零 UI 框架依赖；`@kit/core/shadcn` 是另一个入口，谁引谁承担 radix / date-fns / sonner 的体积，车间 H5 不必引。
 
 ## 快速开始
 

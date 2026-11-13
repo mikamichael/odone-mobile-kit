@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 const resolvePath = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 
@@ -8,9 +9,11 @@ export default defineConfig({
   // GitHub Pages 部署在 /<repo>/ 下，构建时用 PAGES_BASE 传进来；本地与自托管保持根路径。
   base: process.env.PAGES_BASE ?? '/',
   root: resolvePath('./apps/demo'),
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
+      '@': resolvePath('./apps/demo/src'),
+      '@kit/core/shadcn': resolvePath('./packages/core/src/shadcn/index.ts'),
       '@kit/core': resolvePath('./packages/core/src/index.ts'),
       '@kit/core-theme': resolvePath('./packages/core/src/theme/tokens.css'),
       '@kit/adapters': resolvePath('./packages/adapters/src/index.ts'),

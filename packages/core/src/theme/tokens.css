@@ -1,25 +1,75 @@
-/* 一套主题，全部走变量；换观感只改这一层，不动组件。 */
+/* 主题层：品牌原值 → 语义 → 尺度（组件只准引用语义层与尺度层）。
+ * 换观感只改这一段；旧变量名全部保留（见末尾别名），换版不需要动组件。
+ * 结构参考 tailwind-design-system 的 token 三层；不引入 Tailwind，纯 CSS 变量实现。
+ */
 :root {
-  --kit-color-bg: #f5f6f8;
-  --kit-color-surface: #ffffff;
-  --kit-color-text: #16181d;
-  --kit-color-text-muted: #6b7280;
-  --kit-color-border: #e3e6eb;
-  --kit-color-primary: #1f6feb;
-  --kit-color-primary-text: #ffffff;
-  --kit-color-danger: #c62828;
-  --kit-color-danger-bg: #fdecec;
-  --kit-color-warning-bg: #fff6e0;
+  /* ---------- 1 层：品牌原值 ---------- */
+  --kit-brand-blue-600: #1f6feb;
+  --kit-brand-blue-500: #4c8dff;
+  --kit-brand-blue-050: #eaf2ff;
+  --kit-brand-gray-900: #16181d;
+  --kit-brand-gray-500: #6b7280;
+  --kit-brand-gray-200: #e3e6eb;
+  --kit-brand-gray-050: #f5f6f8;
+  --kit-brand-white: #ffffff;
+  --kit-brand-red-600: #c62828;
+  --kit-brand-red-500: #ff6b6b;
+  --kit-brand-red-050: #fdecec;
+  --kit-brand-amber-050: #fff6e0;
+  --kit-brand-green-600: #1b7f3b;
+  --kit-brand-green-050: #e8f5ec;
 
-  --kit-radius: 10px;
-  --kit-gap: 12px;
-  --kit-tap: 44px;            /* 最小点按高度：车间戴手套也点得中 */
-  --kit-font: 15px;
-  --kit-font-small: 13px;
-  --kit-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+  /* ---------- 2 层：语义（组件只准用这层） ---------- */
+  --kit-color-bg: var(--kit-brand-gray-050);
+  --kit-color-surface: var(--kit-brand-white);
+  --kit-color-text: var(--kit-brand-gray-900);
+  --kit-color-text-muted: var(--kit-brand-gray-500);
+  --kit-color-border: var(--kit-brand-gray-200);
+  --kit-color-primary: var(--kit-brand-blue-600);
+  --kit-color-primary-text: var(--kit-brand-white);
+  --kit-color-primary-soft: var(--kit-brand-blue-050);
+  --kit-color-danger: var(--kit-brand-red-600);
+  --kit-color-danger-bg: var(--kit-brand-red-050);
+  --kit-color-warning: #8a5a00;
+  --kit-color-warning-bg: var(--kit-brand-amber-050);
+  --kit-color-success: var(--kit-brand-green-600);
+  --kit-color-success-bg: var(--kit-brand-green-050);
+  /* 焦点环独立于主色：主色调整时焦点可见性不会跟着漂 */
+  --kit-color-ring: var(--kit-brand-blue-600);
+  --kit-color-ring-offset: var(--kit-brand-white);
 
+  /* ---------- 3 层：尺度 ---------- */
+  /* 字号：现有 15/13 两档不够，组件里已散落 12/17/18 三处写死 */
+  --kit-font-xs: 12px;   /* 帮助/错误文案 */
+  --kit-font-sm: 13px;   /* 次要信息、表头 */
+  --kit-font-md: 15px;   /* 正文 */
+  --kit-font-lg: 17px;   /* 页标题 */
+  --kit-font-xl: 18px;   /* 返回键图标 */
+  /* 兼容旧名：现有组件全部写的是 --kit-font-small，改名前先留别名，避免一次性铺开 */
+  --kit-font-small: var(--kit-font-sm);
+  /* 旧名一并保留：--kit-font 正文、--kit-gap 常规间距（组件里在用，缺了就整页失效） */
+  --kit-font: var(--kit-font-md);
+  --kit-gap: var(--kit-space-3);
+
+  /* 间距：现有 6/10/12/14 四处手写，收敛成阶梯 */
+  --kit-space-1: 6px;
+  --kit-space-2: 10px;
+  --kit-space-3: 12px;
+  --kit-space-4: 14px;
+
+  /* 圆角：现有 --kit-radius 10px 与组件内写死的 8px 打架，拆成两档 */
+  --kit-radius-sm: 8px;   /* 输入框、按钮 */
+  --kit-radius: 10px;     /* 卡片、页面块 */
+
+  /* 动效 */
+  --kit-duration-fast: 120ms;
+  --kit-ease-out: ease-out;
+
+  /* 点按与安全区（保留原值） */
+  --kit-tap: 44px;
   --kit-safe-top: env(safe-area-inset-top, 0px);
   --kit-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --kit-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,10 +79,16 @@
     --kit-color-text: #e6e8ec;
     --kit-color-text-muted: #9aa3b2;
     --kit-color-border: #2c313a;
-    --kit-color-primary: #4c8dff;
-    --kit-color-danger: #ff6b6b;
+    --kit-color-primary: var(--kit-brand-blue-500);
+    --kit-color-primary-soft: #1d2a3d;
+    --kit-color-danger: var(--kit-brand-red-500);
     --kit-color-danger-bg: #3a1f1f;
+    --kit-color-warning: #ffc266;
     --kit-color-warning-bg: #3a3120;
+    --kit-color-success: #5dd08a;
+    --kit-color-success-bg: #17301f;
+    --kit-color-ring: var(--kit-brand-blue-500);
+    --kit-color-ring-offset: #14161a;
     --kit-shadow: none;
   }
 }
@@ -76,19 +132,19 @@ body {
   border-radius: var(--kit-radius);
   background: transparent;
   color: var(--kit-color-text);
-  font-size: 18px;
+  font-size: var(--kit-font-xl);
   cursor: pointer;
 }
 
 .kit-page__titles { min-width: 0; flex: 1; }
-.kit-page__title { margin: 0; font-size: 17px; font-weight: 600; }
+.kit-page__title { margin: 0; font-size: var(--kit-font-lg); font-weight: 600; }
 .kit-page__subtitle { margin: 2px 0 0; font-size: var(--kit-font-small); color: var(--kit-color-text-muted); }
 .kit-page__extra { flex: 0 0 auto; }
 
 .kit-page__body {
   flex: 1;
   padding: 14px 14px calc(20px + var(--kit-safe-bottom));
-  transition: transform 120ms ease-out;
+  transition: transform var(--kit-duration-fast) var(--kit-ease-out);
   overscroll-behavior: contain;
 }
 
@@ -189,14 +245,14 @@ body {
   background: var(--kit-color-bg);
   color: var(--kit-color-text);
   border: 1px solid var(--kit-color-border);
-  border-radius: 8px;
+  border-radius: var(--kit-radius-sm);
   font: inherit;
 }
 .kit-input--textarea { min-height: 76px; resize: vertical; }
-.kit-input:focus-visible { outline: 2px solid var(--kit-color-primary); outline-offset: 1px; }
+.kit-input:focus-visible { outline: 2px solid var(--kit-color-ring); outline-offset: 1px; }
 .kit-field__unit { flex: 0 0 auto; color: var(--kit-color-text-muted); font-size: var(--kit-font-small); }
-.kit-field__help { margin: 0; font-size: 12px; color: var(--kit-color-text-muted); }
-.kit-field__error { margin: 0; font-size: 12px; color: var(--kit-color-danger); }
+.kit-field__help { margin: 0; font-size: var(--kit-font-xs); color: var(--kit-color-text-muted); }
+.kit-field__error { margin: 0; font-size: var(--kit-font-xs); color: var(--kit-color-danger); }
 .kit-field--invalid .kit-input { border-color: var(--kit-color-danger); }
 
 /* ---------- 按钮 ---------- */
@@ -204,7 +260,7 @@ body {
   min-height: var(--kit-tap);
   padding: 10px 16px;
   border: 1px solid var(--kit-color-border);
-  border-radius: 8px;
+  border-radius: var(--kit-radius-sm);
   background: var(--kit-color-surface);
   color: var(--kit-color-text);
   font: inherit;
