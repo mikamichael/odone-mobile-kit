@@ -7,6 +7,18 @@
   "license": "Apache-2.0",
   "exports": {
     ".": "./src/index.ts",
-    "./theme.css": "./src/theme/tokens.css"
+    "./theme.css": "./src/theme/tokens.css",
+    "./shadcn": "./src/shadcn/index.ts"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^0.545.0",
+    "next-themes": "^0.4.6",
+    "radix-ui": "^1.8.1",
+    "react-day-picker": "^10.0.2",
+    "sonner": "^2.0.8",
+    "tailwind-merge": "^3.3.1"
   }
 }

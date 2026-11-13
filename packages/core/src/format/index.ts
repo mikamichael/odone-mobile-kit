@@ -6,6 +6,23 @@ export function formatQty(value: number | string | null | undefined, digits = 2)
 }
 
 /**
+ * 日期：只要年月日，一律北京时间 yyyy-MM-dd（不出现 UTC 日期偏移）。
+ */
+export function formatDate(input: number | string | Date | null | undefined): string {
+  if (input === null || input === undefined || input === '') return '—';
+  const date = input instanceof Date ? input : new Date(input);
+  if (Number.isNaN(date.getTime())) return '—';
+  const parts = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+  const pick = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? '00';
+  return `${pick('year')}-${pick('month')}-${pick('day')}`;
+}
+
+/**
  * 时间：一律按北京时间展示，格式固定 yyyy-MM-dd HH:mm:ss。
  * 不接受把 UTC/ISO 原文直接透到界面上。
  */

@@ -4,5 +4,12 @@
   "private": true,
   "type": "module",
   "description": "演示站：用假数据展示内核的列表 / 表单 / 状态 / 适配器用法。",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "date-fns": "^4.4.0",
+    "next-themes": "^0.4.6",
+    "radix-ui": "^1.8.1",
+    "react-day-picker": "^10.0.2",
+    "sonner": "^2.0.8"
+  }
 }

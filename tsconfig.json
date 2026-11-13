@@ -16,6 +16,9 @@
     "verbatimModuleSyntax": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"],
     "paths": {
+      "@/*": ["./apps/demo/src/*"],
+      "@kit/core/shadcn": ["./packages/core/src/shadcn/index.ts"],
+      "@kit/core/shadcn/*": ["./packages/core/src/shadcn/*"],
       "@kit/core": ["./packages/core/src/index.ts"],
       "@kit/adapters": ["./packages/adapters/src/index.ts"]
     }
